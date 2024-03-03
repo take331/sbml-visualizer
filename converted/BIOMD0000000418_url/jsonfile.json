@@ -1,0 +1,133 @@
+{
+	"parameters": {
+		"Kd": {
+			"Id": "Kd",
+			"name": "",
+			"value": 1e-05,
+			"isConstant": true
+		},
+		"Ksp": {
+			"Id": "Ksp",
+			"name": "",
+			"value": 0.001,
+			"isConstant": true
+		},
+		"dspksp": {
+			"Id": "dspksp",
+			"name": "",
+			"value": null,
+			"isConstant": false
+		},
+		"dspspkd": {
+			"Id": "dspspkd",
+			"name": "",
+			"value": null,
+			"isConstant": false
+		},
+		"h": {
+			"Id": "h",
+			"name": "",
+			"value": 2.0,
+			"isConstant": true
+		},
+		"k0": {
+			"Id": "k0",
+			"name": "",
+			"value": 0.1,
+			"isConstant": true
+		},
+		"ka": {
+			"Id": "ka",
+			"name": "",
+			"value": 40.0,
+			"isConstant": true
+		},
+		"ks": {
+			"Id": "ks",
+			"name": "",
+			"value": 10.0,
+			"isConstant": true
+		},
+		"ku": {
+			"Id": "ku",
+			"name": "",
+			"value": 0.1,
+			"isConstant": true
+		},
+		"s": {
+			"Id": "s",
+			"name": "",
+			"value": 1000.0,
+			"isConstant": true
+		}
+	},
+	"compartments": {
+		"univ": {
+			"Id": "univ",
+			"name": "",
+			"size": 1.0,
+			"dimensionality": 3,
+			"isConstant": true
+		}
+	},
+	"species": {
+		"P": {
+			"Id": "P",
+			"name": "",
+			"value": 10.0,
+			"valueType": "Amount",
+			"compartment": "univ",
+			"isConstant": false,
+			"isBoundarySpecies": null,
+			"hasOnlySubstanceUnits": false
+		}
+	},
+	"reactions": {
+		"___r1": {
+			"Id": "___r1",
+			"name": "",
+			"reactants": [
+				[
+					1.0,
+					"P"
+				]
+			],
+			"rxnParameters": [],
+			"rateLaw": "ks * (k0 + (dspspkd / ka)^h) / (1 + (dspspkd / ka)^h)"
+		},
+		"___r2": {
+			"Id": "___r2",
+			"name": "",
+			"reactants": [
+				[
+					-1.0,
+					"P"
+				]
+			],
+			"rxnParameters": [
+				[
+					"__RATE__",
+					0.1
+				]
+			],
+			"rateLaw": "__RATE__ * P"
+		}
+	},
+	"functions": {},
+	"assignmentRules": {
+		"1": {
+			"Id": "1",
+			"name": "",
+			"variable": "dspksp",
+			"math": "(Ksp / 2) * (1 + (s + P * univ) / Ksp - ((1 + (s + P * univ) / Ksp)^2 - 4 * s * P * univ / Ksp^2)^0.5)"
+		},
+		"2": {
+			"Id": "2",
+			"name": "",
+			"variable": "dspspkd",
+			"math": "(Kd / 2) * (1 + 2 * dspksp / Kd - ((1 + 2 * dspksp / Kd)^2 - 4 * dspksp^2 / Kd^2)^0.5)"
+		}
+	},
+	"rateRules": {},
+	"initialAssignments": {}
+}

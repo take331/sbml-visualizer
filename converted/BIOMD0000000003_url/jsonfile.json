@@ -1,0 +1,225 @@
+{
+	"parameters": {
+		"V1": {
+			"Id": "V1",
+			"name": "V1",
+			"value": null,
+			"isConstant": false
+		},
+		"V3": {
+			"Id": "V3",
+			"name": "V3",
+			"value": null,
+			"isConstant": false
+		},
+		"VM1": {
+			"Id": "VM1",
+			"name": "VM1",
+			"value": 3.0,
+			"isConstant": true
+		},
+		"VM3": {
+			"Id": "VM3",
+			"name": "VM3",
+			"value": 1.0,
+			"isConstant": true
+		},
+		"Kc": {
+			"Id": "Kc",
+			"name": "Kc",
+			"value": 0.5,
+			"isConstant": true
+		}
+	},
+	"compartments": {
+		"cell": {
+			"Id": "cell",
+			"name": "cell",
+			"size": 1.0,
+			"dimensionality": 3,
+			"isConstant": true
+		}
+	},
+	"species": {
+		"C": {
+			"Id": "C",
+			"name": "Cyclin",
+			"value": 0.01,
+			"valueType": "Concentration",
+			"compartment": "cell",
+			"isConstant": false,
+			"isBoundarySpecies": null,
+			"hasOnlySubstanceUnits": false
+		},
+		"M": {
+			"Id": "M",
+			"name": "CDC-2 Kinase",
+			"value": 0.01,
+			"valueType": "Concentration",
+			"compartment": "cell",
+			"isConstant": false,
+			"isBoundarySpecies": null,
+			"hasOnlySubstanceUnits": false
+		},
+		"X": {
+			"Id": "X",
+			"name": "Cyclin Protease",
+			"value": 0.01,
+			"valueType": "Concentration",
+			"compartment": "cell",
+			"isConstant": false,
+			"isBoundarySpecies": null,
+			"hasOnlySubstanceUnits": false
+		}
+	},
+	"reactions": {
+		"reaction1": {
+			"Id": "reaction1",
+			"name": "creation of cyclin",
+			"reactants": [
+				[
+					1.0,
+					"C"
+				]
+			],
+			"rxnParameters": [
+				[
+					"vi",
+					0.025
+				]
+			],
+			"rateLaw": "cell * vi"
+		},
+		"reaction2": {
+			"Id": "reaction2",
+			"name": "default degradation of cyclin",
+			"reactants": [
+				[
+					-1.0,
+					"C"
+				]
+			],
+			"rxnParameters": [
+				[
+					"kd",
+					0.01
+				]
+			],
+			"rateLaw": "C * cell * kd"
+		},
+		"reaction3": {
+			"Id": "reaction3",
+			"name": "cdc2 kinase triggered degration of cyclin",
+			"reactants": [
+				[
+					-1.0,
+					"C"
+				]
+			],
+			"rxnParameters": [
+				[
+					"vd",
+					0.25
+				],
+				[
+					"Kd",
+					0.02
+				]
+			],
+			"rateLaw": "C * cell * vd * X * (C + Kd)^-1"
+		},
+		"reaction4": {
+			"Id": "reaction4",
+			"name": "activation of cdc2 kinase",
+			"reactants": [
+				[
+					1.0,
+					"M"
+				]
+			],
+			"rxnParameters": [
+				[
+					"K1",
+					0.005
+				]
+			],
+			"rateLaw": "cell * (1 + -1 * M) * V1 * (K1 + -1 * M + 1)^-1"
+		},
+		"reaction5": {
+			"Id": "reaction5",
+			"name": "deactivation of cdc2 kinase",
+			"reactants": [
+				[
+					-1.0,
+					"M"
+				]
+			],
+			"rxnParameters": [
+				[
+					"V2",
+					1.5
+				],
+				[
+					"K2",
+					0.005
+				]
+			],
+			"rateLaw": "cell * M * V2 * (K2 + M)^-1"
+		},
+		"reaction6": {
+			"Id": "reaction6",
+			"name": "activation of cyclin protease",
+			"reactants": [
+				[
+					1.0,
+					"X"
+				]
+			],
+			"rxnParameters": [
+				[
+					"K3",
+					0.005
+				]
+			],
+			"rateLaw": "cell * V3 * (1 + -1 * X) * (K3 + -1 * X + 1)^-1"
+		},
+		"reaction7": {
+			"Id": "reaction7",
+			"name": "deactivation of cyclin protease",
+			"reactants": [
+				[
+					-1.0,
+					"X"
+				]
+			],
+			"rxnParameters": [
+				[
+					"K4",
+					0.005
+				],
+				[
+					"V4",
+					0.5
+				]
+			],
+			"rateLaw": "cell * V4 * X * (K4 + X)^-1"
+		}
+	},
+	"functions": {},
+	"assignmentRules": {
+		"1": {
+			"Id": "1",
+			"name": "",
+			"variable": "V1",
+			"math": "C * VM1 * (C + Kc)^-1"
+		},
+		"2": {
+			"Id": "2",
+			"name": "",
+			"variable": "V3",
+			"math": "M * VM3"
+		}
+	},
+	"rateRules": {},
+	"initialAssignments": {}
+}
