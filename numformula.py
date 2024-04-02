@@ -3,23 +3,28 @@
 # model -> latex -> png -> display(main.py)
 # 数式を画像に変換して、main.pyに画像のpathを渡す
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 class Numeric_Formula:
-    def convert_tex(formula_str):
-        
-        return 
     
-    def tex_to_png(formula_str):
+    def tex_to_png():
         fig = plt.figure()
-        plt.axes("off")
-        formula_tex = self.convert_tex(formula_str)
-        plt.text(0.5, 0.5, f"${formula_tex}$", size=50, ha="center", va="center")
+        ax = fig.add_subplot()
 
-        png_path = "./converted/formula/result.png"
-        plt.savefig(png_path, format="png", bbox_inches="tight", pad_inches=0.4)
-        plt.close(fig)
+        fig.subplots_adjust(top=0.85)
 
-        return png_path
+        ax.axis([0, 10, 0, 10])
+        ax.invert_yaxis()
+        ax.axis("off")
+
+        ax.text(0, 0, r'$E=mc^2$', style='italic',
+            bbox={'facecolor': '#fff', 'alpha': 0.5, 'pad': 10})
+
+        ax.text(0, 2, r'$E=mc^2$', style='italic',
+            bbox={'facecolor': '#fff', 'alpha': 0.5, 'pad': 10})
+
+        return fig
+    
+    
     
         

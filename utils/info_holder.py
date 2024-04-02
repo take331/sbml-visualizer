@@ -29,6 +29,7 @@ class InfoHolder:
         self.reactions = [r for r in self.model_instance.r.keys()]
 
         self.di = load_json(json_file_path)
+
         # assignmentRulesの取得
         self.assignment_num = len(self.di["assignmentRules"])
         self.assignment_dict = dict()
@@ -37,7 +38,6 @@ class InfoHolder:
 
         self.nodes = self.species
         self.edges = []
-
 
     def insert_table_values(self):
         # Importした際にTableに挿入する値を返す
@@ -88,8 +88,25 @@ class InfoHolder:
     def get_formula(self):
         formula = []
         assignment = []
+        reactants = dict()
+
+        for i in self.species:
+            reactants[i] = []
+        
+        """
         for r in self.reactions:
             formula.append(self.di["reactions"][str(r)]["rateLaw"])
         for a in range(1, self.assignment_num+1):
             assignment.append(self.di["assignmentRules"][str(a)]["math"])
         return formula, assignment
+        """
+        for r in self.reactions:
+            pm = self.di["reactions"][str(r)]["reactants"][0][0]
+            parent = self.di["reactions"][str(r)]["reactants"][0][1]
+            
+            if pm < 0:
+                reactants[parent].append('-1.0 * ' + self.di["reactions"][str(r)]["rateLaw"])
+            else:
+                reactants[parent].append(self.di["reactions"][str(r)]["rateLaw"])
+            
+        return reactants

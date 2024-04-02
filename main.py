@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import tkinter as tk
 from utils import layout, check_exist, info_holder, convert_file
 from draw_network import NetworkDrawer
+from numformula import Numeric_Formula
 import os
 
 import matplotlib
@@ -11,7 +12,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import igraph as ig
 
 
-'''
+
 # GUIがぼやける現象を防ぐ
 def make_dpi_aware():
     import ctypes
@@ -19,12 +20,15 @@ def make_dpi_aware():
     if int(platform.release()) >= 10:
         ctypes.windll.shcore.SetProcessDpiAwareness(True)
 make_dpi_aware()
-'''
+
 
 # sg.theme('LightBlue6')
 layout = layout.get_layouts()
-window = sg.Window('SBML Visualizer', layout, finalize=True, no_titlebar=True)
-window.maximize()
+window = sg.Window('SBML Visualizer', layout, no_titlebar=True)
+# window.maximize()
+
+#TODO: アプリの解像度を上げる関数を実行するとウィンドウサイズがおかしくなる
+# finalizeをfalseにすると解決するが、ウィンドウサイズを最大化することが出来ない
 
 ##### ----- elements ----- #####
 fpbox_elem = window['-filepath_box-']
@@ -33,6 +37,7 @@ table_elem = window['-model_catalog-']
 item_elem = window['-selected_item_name-']
 value_elem = window['-change_value-']
 formula_elem = window['-formula-']
+graph_elem = window['graph']
 ROW_DATA = None
 file_path = None
 
@@ -40,7 +45,7 @@ file_path = None
 def draw_canvas(canvas, figure):
     figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
     figure_canvas_agg.draw()
-    figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expend=1)
+    figure_canvas_agg.get_tk_widget().pack(side='top', fill='both')
     return figure_canvas_agg
 
 def graph(g):
@@ -102,8 +107,16 @@ while True:
         table_elem.update(ROW_DATA)
 
         # 数式の表示
-        formulas, assignments = info_holder.InfoHolder.get_formula(model_instance)
-        formula_elem.update(('<reactions>\n' + '\n'.join(formulas) ) + '\n' + '\n<assignments>\n' + '\n'.join(assignments))
+        # formulas, assignments = info_holder.InfoHolder.get_formula(model_instance)
+        formulas = info_holder.InfoHolder.get_formula(model_instance)
+        for key in formulas.keys():
+            formulas[key] = ' + '.join(formulas[key])
+        
+        formula_elem.update('\n'.join(formulas.values()))
+        # formula_elem.update(('<reactions>\n' + '\n'.join(formulas) ) + '\n' + '\n<assignments>\n' + '\n'.join(assignments))
+
+        fig2 = Numeric_Formula.tex_to_png()
+        draw_canvas(window['graph'].TKCanvas, fig2)
 
         # ネットワーク図を表示
         g = NetworkDrawer(model_instance).draw_network()

@@ -53,7 +53,7 @@ def get_layouts():
     # == header frame  == #
     header_elements = [
                         [sg.Image('assets\logo1.png', pad=((30, 70),(0,0))), 
-                         sg.Input('import SBML file', key='-filepath_box-', text_color='#979897', disabled=True),
+                         sg.Input('import SBML file', key='-filepath_box-', text_color='#979897', disabled=True, size=(70, 1)),
                          sg.Button('Browse', key='open_browse', pad=(0,0)), 
                          sg.Button('Import', key='file_import', pad=(0,0)),
                          sg.Button('Submit', key='-submit-', pad=(0,0)),
