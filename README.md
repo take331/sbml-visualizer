@@ -1,4 +1,4 @@
-# 数学的プロセスに関する可視化アプリケーションの開発
+# 生物学的プロセスに関する可視化アプリケーションの開発
 
 ## 背景(なぜやる必要があるのか)
 システム生物学における数理モデルは、生物学的プロセスやシステムの動態を表現し、理解を深めるためのツールとして重要である。
@@ -30,9 +30,12 @@ BioModelsは２つの主要なブランチで構成されており、モデル�
 
 下図が示すように、2014年時点で1200を超えるモデルに加え、経路リソースから自動的に生成された140,000oを超えるモデルをホストしている。  
 BioModelsへのモデル送信料は年々増加しており、これは同時にモデリング分野の拡大を示している。
-[1] [2] [3]
+
 
 ![m_gku1181fig1](https://github.com/take331/sbml-visualizer/assets/73569757/45e4467a-f062-4f3c-a8fb-e2b7ff48e96c)
+
+Systems Biology Format Converter (SBFC)は、SBMLモデルを複数のモデリング言語やプログラミング言語のスクリプトに変換するためのツール群である(Rodriguez et al., 2016)。  
+BioModels Databaseは、SBFCを使用して、SBMLモデルの大規模なライブラリを、ユーザーがダウンロードできる他の形式に自動変換している（
 
 ### Systems Biology Markup Language (SBML)
 SBMLは生物学的プロセスの計算モデルを通信及び保存するための、XMLに基づく表現形式である  
@@ -46,9 +49,18 @@ SBMLには、おおきく３つの目的がある
 
 以上より、SBMLの目的は、計算モデルの重要な側面を伝達するために現在の様々なソフトウェアツールで使用される交換形式である共通語として機能することである。 
 
+### SBMLtoODEpy
+SBMLtoODEpyはSBMLモデルをPythonクラスに変換するソフトウェアパッケージである  
+これは、Pythonで記述された生物医学システムに迅速に組み込んだり、直接シミュレートして使用することが出来る
+
+SBMLtoODEpyによって、Pythonのクラスを使用するコードを生成し、独自のコードを書いてインターフェースを作成します。
+
 ## References
 - BioModels
 - BioModels Database: An enhanced, reated nd annotated resource for published quantitative  
   https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2909940/
 - BioModels ten-year anniversary  
   https://academic.oup.com/nar/article/43/D1/D542/2439069
+
+- SBMLtoODEpy  
+  https://github.com/AnabelSMRuggiero/sbmltoodepy
