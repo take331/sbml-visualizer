@@ -10,7 +10,7 @@
 - 既存のアプリケーションには存在しない機能の実装  
 - 非専門家でも扱いやすい  
 - 科学的発見の可能性を向上させる
-より多くの人が理解できる形で表現する
+- より多くの人が理解できる形で表現する
 
 ## 方法(どうやって達成するか)
 ### BioModelsについて
@@ -55,8 +55,38 @@ SBMLtoODEpyはSBMLモデルをPythonクラスに変換するソフトウェア�
 
 SBMLtoODEpyによって、Pythonのクラスを使用するコードを生成し、独自のコードを書いてインターフェースを作成する
 
+### lib
+#### PySimpleGUI 
+
+## Todo
+- [x] SBMLファイルの変換
+  - [x] inputs_modelフォルダ内のファイルを表示
+  - [x] Browseボタンから、任意のSBMLファイルを選択
+- [ ] 数式の表示
+- [ ] テーブルの作成
+- [ ] ネットワーク図
+- [ ] アニメーションの実装
+
+### Small Tasks
+- [ ] 画面の最大化＆高画質化
+
+## Usage
+1. SBMLファイルのダウンロード  
+  [BioModels](https://www.ebi.ac.uk/biomodels/)からSBMLファイルをダウンロードする  
+  ダウンロードしたファイルはinputs_model内または、任意のディレクトリから参照することが可能
+
+2. モデルの可視化  
+   Importボタンをクリックして、SBMLファイルを変換する  
+   変換したファイルは、プログラムに対応していくつかの機能によって可視化される
+
+3. パラメータの変更
+   パラメータを変更して、再度可視化を行う
+
+4. 保存
+   結果を様々な形式で保存する
+
 ## References
-- BioModels
+- [BioModels](https://www.ebi.ac.uk/biomodels/)
 - BioModels Database: An enhanced, reated nd annotated resource for published quantitative  
   https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2909940/
 - BioModels ten-year anniversary  
