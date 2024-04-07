@@ -87,10 +87,7 @@ SBMLtoODEpyによって、Pythonのクラスを使用するコードを生成し
 
 ## References
 - [BioModels](https://www.ebi.ac.uk/biomodels/)
-- BioModels Database: An enhanced, reated nd annotated resource for published quantitative  
-  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2909940/
-- BioModels ten-year anniversary  
-  https://academic.oup.com/nar/article/43/D1/D542/2439069
-
-- SBMLtoODEpy  
-  https://github.com/AnabelSMRuggiero/sbmltoodepy
+- [BioModels Database: An enhanced, reated nd annotated resource for published quantitative](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2909940/)
+- [BioModels ten-year anniversary](https://academic.oup.com/nar/article/43/D1/D542/2439069)
+- [SBMLtoODEpy](https://github.com/AnabelSMRuggiero/sbmltoodepy)
+- [Modeling formalisms in Systems Biology](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3285092/)
