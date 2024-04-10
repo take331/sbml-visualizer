@@ -92,3 +92,4 @@ SBMLtoODEpyによって、Pythonのクラスを使用するコードを生成し
 - [SBMLtoODEpy](https://github.com/AnabelSMRuggiero/sbmltoodepy)
 - [Modeling formalisms in Systems Biology](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3285092/)
 - [Systems Biology: A Brief Overview](https://www.science.org/doi/10.1126/science.1069492?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed)
+- [From functional genomics to systems biology: concepts and practices](https://www.sciencedirect.com/science/article/pii/S1631069103002300)
